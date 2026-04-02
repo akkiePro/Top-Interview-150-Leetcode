@@ -20,23 +20,21 @@ public class MergeSortedArray {
 
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
         int counter1 = 0, counter2 = 0;
-        int []result = new int[m+n];
-        for (int i=0; i<m+n; i++) {
-            if (m>counter1 && (n==0 || nums1[counter1] <= nums2[counter2])) {
-                result[i] = nums1[counter1];
+        int []result = nums1.clone();
+        for (int i=0; i<nums1.length; i++) {
+            if (m>counter1 && (n==0 || result[counter1] <= nums2[counter2])) {
+                nums1[i] = result[counter1];
                 counter1++;
             } else {
-                result[i] = nums2[counter2];
-//                if(n > i) {
+                nums1[i] = nums2[counter2];
                 counter2++;
-//                }
+                if(counter2 == nums2.length) {
+                    n=0;
+                }
             }
         }
-        nums1 = result;
-        System.out.println("Printing result");
-        for (int i : nums1) {
+        for (int i: nums1)
             System.out.println(i);
-        }
     }
 
 }
